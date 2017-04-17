@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Github Navigator</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,500,500i">
+        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/animate.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+
+       
+        <link rel="shortcut icon" href="../assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+        
+        <!-- Top menu -->
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header wow fadeIn">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">GitHub Navigator</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="top-navbar-1">
+                    <ul class="nav navbar-nav navbar-right navbar-search-button">
+                        <li><a class="search-button" href="#"><i class="fa fa-search"></i></a></li>
+                    </ul>
+                    <form class="navbar-form navbar-search-form disabled wow fadeInLeft" role="form" action="/search" method="post">
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="Search..." class="search form-control">
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right navbar-menu-items wow fadeIn">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Features -->
+        <div class="features-container section-container">
+            <div class="container">
+            {% if search_results %}
+                <div class="row">
+                    <div class="col-sm-12 features section-description wow fadeIn">
+                        <h2>Search Results</h2>
+                        <div class="divider-1 wow fadeInUp"><span></span></div>
+                    </div>
+                </div>
+                <h1>{{search_term}}</h1>
+                {% for each in search_results %}
+                    <div class="row">
+                        <div class="col-sm-6 features-box wow fadeInLeft">
+                            <div class="row">
+                                <div class="col-sm-3 features-box-icon">
+                                    <a href="{{each.owner_url}}"><img src="{{each.avatar_url}}" alt="avatar" height="42" width="42"/></a>
+                                </div>
+                                <div class="col-sm-9">
+                                    <h3>{{each.respository_name}}</h3>
+                                    <h3> Created {{each.created_at}}</h3>
+                                    {{each.owner_login}}
+                                    <h3>LastCommit</h3>
+                                    {sha} {{each.commit_message}}  {{each.commit_author_name}}
+                                    <hr/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+        <!-- Javascript -->
+        <script src="../assets/js/jquery-1.11.1.min.js"></script>
+        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.backstretch.min.js"></script>
+        <script src="../assets/js/wow.min.js"></script>
+        <script src="../assets/js/scripts.js"></script>
+
+    </body>
+
+</html>
