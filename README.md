@@ -6,6 +6,9 @@ Search GitHub repositories by given search term and present them as html page.
 4) The info about first 5 (newest) repositories is rendered into html template together with some information about latest commit in this repository.
 
 Usage
+
 pip install -r requirements.txt
+
 python app.py
+
 Open a browser and do GET request to e.g. http://localhost:8000/navigator?search_term=arrow
