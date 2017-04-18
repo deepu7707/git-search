@@ -16,3 +16,7 @@ WTF_CSRF_ENABLED = False
 # FLASK LOGIN MANAGER
 app.config['SECRET_KEY'] = \
 'FDom\r\xad\xa6\xb8b\xb0\xea\xce\t\xca\x9d\xc7pgV\x00\xe0\x12\x116'
+
+SEARCH_API = 'https://api.github.com/search/repositories?q={0}&sort=created_at&order=desc'
+
+SEARCH_COMMIT_API = 'https://api.github.com/repos/{0}/{1}/commits/master'

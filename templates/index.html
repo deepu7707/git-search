@@ -43,9 +43,9 @@
                     <ul class="nav navbar-nav navbar-right navbar-search-button">
                         <li><a class="search-button" href="#"><i class="fa fa-search"></i></a></li>
                     </ul>
-                    <form class="navbar-form navbar-search-form disabled wow fadeInLeft" role="form" action="/search" method="post">
+                    <form class="navbar-form navbar-search-form disabled wow fadeInLeft" role="form" action="/search" method="get">
                         <div class="form-group">
-                            <input type="text" name="search" placeholder="Search..." class="search form-control">
+                            <input type="text" name="query" placeholder="Search..." class="search form-control">
                         </div>
                     </form>
                     <ul class="nav navbar-nav navbar-right navbar-menu-items wow fadeIn">
@@ -60,33 +60,39 @@
         <!-- Features -->
         <div class="features-container section-container">
             <div class="container">
-            {% if search_results %}
-                <div class="row">
-                    <div class="col-sm-12 features section-description wow fadeIn">
-                        <h2>Search Results</h2>
-                        <div class="divider-1 wow fadeInUp"><span></span></div>
-                    </div>
-                </div>
-                <h1>{{search_term}}</h1>
-                {% for each in search_results %}
+            {% if error %}
+                <h2>{{ error.0 }}</h2>
+            {% else %}
+                {% if search_results %}
                     <div class="row">
-                        <div class="col-sm-6 features-box wow fadeInLeft">
-                            <div class="row">
-                                <div class="col-sm-3 features-box-icon">
-                                    <a href="{{each.owner_url}}"><img src="{{each.avatar_url}}" alt="avatar" height="42" width="42"/></a>
-                                </div>
-                                <div class="col-sm-9">
-                                    <h3>{{each.respository_name}}</h3>
-                                    <h3> Created {{each.created_at}}</h3>
-                                    {{each.owner_login}}
-                                    <h3>LastCommit</h3>
-                                    {sha} {{each.commit_message}}  {{each.commit_author_name}}
-                                    <hr/>
+                        <div class="col-sm-12 features section-description wow fadeIn">
+                            <h2>Search Results</h2>
+                            <div class="divider-1 wow fadeInUp"><span></span></div>
+                        </div>
+                    </div>
+                    <h1>{{search_term}}</h1>
+                    {% for each in search_results %}
+                        <div class="row">
+                            <div class="col-sm-6 features-box wow fadeInLeft">
+                                <div class="row">
+                                    <div class="col-sm-3 features-box-icon">
+                                        <a href="{{each.owner_url}}"><img src="{{each.avatar_url}}" alt="avatar" height="42" width="42"/></a>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h4>{{each.respository_name}}</h4>
+                                        <h5> Created {{each.created_at}}</h5>
+                                        {{each.owner_login}}
+                                        <h5>LastCommit</h5>
+                                        <strong>{{each.sha}}</strong><br>
+                                        {{each.commit_message}}  <strong>
+                                        <br>{{each.commit_author_name}}</strong>
+                                        <hr/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
             </div>
         </div>
@@ -98,5 +104,4 @@
         <script src="../assets/js/scripts.js"></script>
 
     </body>
-
 </html>
