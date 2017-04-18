@@ -4,6 +4,12 @@ import urllib2
 from config import SEARCH_COMMIT_API
 
 def get_last_commit(user_login, repo_name):
+	"""
+	Fetch latest commit details for user login and respository
+	Input : userlogin, repo_name
+	Output : sha, commit_message, commit_author_name
+	"""
+
 	commit_details = {}
 	latest_commit_formatted_api = SEARCH_COMMIT_API.format(user_login, repo_name)
 	req = urllib2.Request(latest_commit_formatted_api)
@@ -15,6 +21,15 @@ def get_last_commit(user_login, repo_name):
 	return commit_details
 
 def search_github(query_url, max_results):
+	"""
+	Fetch data from github relevant to query.
+	Input: [query_url (Github API to fetch data), 
+			max_results (Limit search results)]
+	Output: Top five results relevent to query with all required params
+			[respository_name, owner_url, created_at, owner_login, 
+			commit_message, commit_author_name, avatar_url, sha]
+	"""
+
 	try:
 		final_response = []
 		req = urllib2.Request(query_url)
