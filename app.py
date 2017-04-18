@@ -7,7 +7,7 @@ from helpers.utils import get_last_commit, search_github
 
 @app.errorhandler(404)
 def not_found(error):
-    return (render_template('404.html'), 404)
+    return render_template('404.html'), 404
 
 
 @app.route("/")
@@ -15,15 +15,15 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/search",methods=['GET'])
+@app.route("/navigator",methods=['GET'])
 def search():
     """
-    Github Search API with query as url param
+    Github Search API with search_term as url param
     """
 
     try:
-        if request.method == 'GET' and 'query' in request.args:
-            search_term =  request.args.get('query', '')
+        if request.method == 'GET' and 'search_term' in request.args:
+            search_term =  request.args.get('search_term', '')
         else:
             render_template('index.html', search_results=[],
                             error=["Sorry.Search keyword is empty"])
